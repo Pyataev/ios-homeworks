@@ -19,7 +19,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.masksToBounds = false
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = 70
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = true
         
@@ -76,7 +76,6 @@ class ProfileHeaderView: UIView {
         self.addSubview(self.NameLabel)
         self.addSubview(self.statusLabel)
         self.addSubview(self.statusButton)
-        
         
         
         NSLayoutConstraint.activate([

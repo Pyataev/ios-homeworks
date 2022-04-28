@@ -9,19 +9,18 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        self.viewWillLayoutSubviews()
-        
-        
-    }
-    
-    private lazy var profileHeaderView:ProfileHeaderView = {
+    private lazy var profileHeaderView: ProfileHeaderView = {
         let view = ProfileHeaderView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+        
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        
+    }
     
     private lazy var uiButton: UIButton = {
         let button = UIButton()
@@ -33,6 +32,7 @@ class ProfileViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         return button
+        
     }()
     
     override func viewWillLayoutSubviews() {
@@ -45,6 +45,8 @@ class ProfileViewController: UIViewController {
             profileHeaderView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),  // лево
             profileHeaderView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),    // право
             profileHeaderView.heightAnchor.constraint(equalToConstant: 220),  // высота
+            
+            // кнопка
             uiButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),  // лево
             uiButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),    // право
             uiButton.heightAnchor.constraint(equalToConstant: 50),
