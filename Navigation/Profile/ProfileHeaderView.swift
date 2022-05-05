@@ -7,7 +7,12 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+
+protocol ProfileHeaderViewProtocol: AnyObject {
+    func didTapStatusButton(textFieldIsVisible: Bool, completion: @escaping () -> Void)
+}
+
+class ProfileHeaderView: UIView, UITextFieldDelegate {
     
     private lazy var pictureImageView: UIImageView = {
         
@@ -45,11 +50,34 @@ class ProfileHeaderView: UIView {
         return label
     }()
     
-    private lazy var statusButton: UIButton = {
+    private lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Введите статус"
+        textField.isHidden = true
+        textField.backgroundColor = .white
+        textField.font = UIFont(name: "Helvetica-Regular", size: 15)
+        textField.textColor = .black
+        textField.layer.cornerRadius = 12
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.textAlignment = .center
+        textField.clearButtonMode = .whileEditing
+        textField.clearButtonMode = .unlessEditing
+        textField.clearButtonMode = .always
+        let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 20.0, height: 2.0))
+        textField.leftView = leftView
+        textField.leftViewMode = .always
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        return textField
+    }()
+    
+    private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .selected)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 15
+        button.layer.cornerRadius = 4
         button.backgroundColor = .systemBlue
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -61,7 +89,6 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
@@ -71,20 +98,25 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private var buttonTopConstraint: NSLayoutConstraint?
+    
+    weak var delegate: ProfileHeaderViewProtocol?
+    
+    
     private func drawSelf() {
         self.addSubview(self.pictureImageView)
         self.addSubview(self.NameLabel)
         self.addSubview(self.statusLabel)
-        self.addSubview(self.statusButton)
-        
+        self.addSubview(self.setStatusButton)
+        self.textField.delegate = self
         
         NSLayoutConstraint.activate([
-            statusButton.leadingAnchor.constraint(equalTo: self.pictureImageView.leadingAnchor),
-            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusButton.topAnchor.constraint(equalTo: self.pictureImageView.bottomAnchor, constant: 16),
-            statusButton.heightAnchor.constraint(equalToConstant: 50),
+            setStatusButton.leadingAnchor.constraint(equalTo: self.pictureImageView.leadingAnchor),
+            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            setStatusButton.topAnchor.constraint(equalTo: self.pictureImageView.bottomAnchor, constant: 16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             statusLabel.leadingAnchor.constraint(equalTo: self.NameLabel.leadingAnchor),
-            statusLabel.bottomAnchor.constraint(equalTo: self.statusButton.bottomAnchor, constant: -84)
+            statusLabel.bottomAnchor.constraint(equalTo: self.setStatusButton.bottomAnchor, constant: -84)
         ])
     }
     

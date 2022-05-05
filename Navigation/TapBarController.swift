@@ -11,8 +11,7 @@ class TapBarController: UITabBarController {
     
     
     let lenta = FeedViewController()
-    let profile = ProfileViewController()
-    let post = PostViewController()
+    let profile = LogInViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +22,7 @@ class TapBarController: UITabBarController {
     private func setupController() {
         let lentaNC = UINavigationController(rootViewController: lenta)
         let profileNC = UINavigationController(rootViewController: profile)
+        
         lenta.tabBarItem.title = "Lenta"
         lenta.tabBarItem.image = UIImage(systemName: "house")
         profile.tabBarItem.title = "Profile"
