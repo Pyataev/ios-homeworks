@@ -93,10 +93,10 @@
 				CE8030B127FA14F50098FD08 /* FeedViewController.swift */,
 				CE8A12D82804A209006AB448 /* InfoViewController.swift */,
 				CE8030B727FA22470098FD08 /* PostViewController.swift */,
+				CED7F33D281B0A90008359B7 /* LogInViewController.swift */,
 				CE8030A627FA11110098FD08 /* Assets.xcassets */,
 				CE8030A827FA11110098FD08 /* LaunchScreen.storyboard */,
 				CE8030AB27FA11110098FD08 /* Info.plist */,
-				CED7F33D281B0A90008359B7 /* LogInViewController.swift */,
 				CED7F33F281F0F97008359B7 /* pictures.json */,
 			);
 			path = Navigation;

@@ -15,6 +15,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return scrollView
     }()
     
+    private let contentView: UIView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UIView())
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -150,30 +155,45 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private func setUpView() {
         
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(stackView)
-        self.scrollView.addSubview(logoImageView)
-        self.stackView.addArrangedSubview(textFieldStackView)
-        self.stackView.addArrangedSubview(logInButton)
-        self.textFieldStackView.addArrangedSubview(infoTextField)
-        self.textFieldStackView.addArrangedSubview(passwordTextField)
+        view.addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-
-            logoImageView.bottomAnchor.constraint(equalTo: self.stackView.topAnchor, constant: -70),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16)
+        ])
+        
+        scrollView.addSubview(contentView)
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ])
+        
+        [stackView, logoImageView].forEach {contentView.addSubview($0)}
+        
+        stackView.addArrangedSubview(textFieldStackView)
+        stackView.addArrangedSubview(logInButton)
+        textFieldStackView.addArrangedSubview(infoTextField)
+        textFieldStackView.addArrangedSubview(passwordTextField)
+        
+        NSLayoutConstraint.activate([
+            
+            logoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 100),
+            logoImageView.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -70),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
-            logoImageView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-
-            stackView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor),
-            stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
-
+            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            stackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -150),
+            
             infoTextField.heightAnchor.constraint(equalToConstant: 50),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             logInButton.heightAnchor.constraint(equalToConstant: 50)
