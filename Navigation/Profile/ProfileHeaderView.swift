@@ -38,6 +38,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         label.textColor = .black
         label.font = UIFont(name: "Helvetica-Bold", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = true
+        
         return label
     }()
     
@@ -47,6 +48,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         label.textColor = .gray
         label.font = UIFont(name: "Helvetica-Regular", size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
+       
         return label
     }()
     
@@ -76,7 +78,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
     }
     
     private var buttonTopConstraint: NSLayoutConstraint?
-
+    
     weak var delegate: ProfileHeaderViewProtocol?
     
     private func drawSelf() {
@@ -84,7 +86,7 @@ class ProfileHeaderView: UIView, UITextFieldDelegate {
         self.addSubview(self.NameLabel)
         self.addSubview(self.statusLabel)
         self.addSubview(self.statusButton)
-  
+        
         
         NSLayoutConstraint.activate([
             statusButton.leadingAnchor.constraint(equalTo: self.pictureImageView.leadingAnchor),
